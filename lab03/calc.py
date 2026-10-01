@@ -6,8 +6,12 @@ def summa(a,b):
     return a+b
 def rasn(a,b):
     return a-b
+def proisv(a,b):
+    return a*b
 
 if c=="+":
-    summa(a,b)
+    print(summa(a,b))
 elif c=="-":
-    rasn(a,b)
+    print(rasn(a,b))
+elif c == "*":
+    print(proisv(a,b))
