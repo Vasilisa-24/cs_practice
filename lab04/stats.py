@@ -1,4 +1,4 @@
-def parse_record(line: str) -> dict:
+def parse_record(line):
     l1 = line.split(";")
     if len(l1)!=3:
         raise ValueError("Передано не три поля")
@@ -7,11 +7,11 @@ def parse_record(line: str) -> dict:
     try:
         l1[2] = float(l1[2])
     except ValueError:
-        raise ValueError("Данные о темп_ре не являются числом")
+        raise ValueError("Данные о темп-ре не являются числом")
     total = {"Город": l1[0], "Дата": l1[1], "Температура": l1[2]}
     return total
 
-def read_valid(lines: list[str]) -> list[dict]:
+def read_valid(lines):
     lis = []
     for line in lines:
         try:
@@ -21,7 +21,7 @@ def read_valid(lines: list[str]) -> list[dict]:
             continue
     return lis
         
-def average_by_city(records: list[dict])-> dict:
+def average_by_city(records):
     total = {}
     count = {}
     midt = {}
@@ -30,31 +30,14 @@ def average_by_city(records: list[dict])-> dict:
         total[city] = total.get(city, 0) + float(temp)
         count[city] = count.get(city, 0) + 1
     for city in total:
-        midt[city] = f'{total[city]/count[city]}:.1f'
+        midt[city] = float(f'{(total[city]/count[city]):.1f}')
     return midt
 
-def warmest_city(records: list[dict]) -> str:
+def warmest_city(records):
     mit = average_by_city(records)
-    best = ""
+    best = ''
     for city in mit:
         if mit[city] >mit.get(best, "0"):
             best = city
     return best
     
-
-'''import sys
-
-lines = sys.stdin.read().splitlines()
-total = {}
-count = {}
-for line in lines:
-    city, temp, date = line.split(";")
-    total[city] = total.get(city, 0) + float(temp)
-    count[city] = count.get(city, 0) + 1
-best = ""
-for city in total:
-    if best == "" or total[city] / count[city] > total[best] / count[best]:
-        best = city
-print(len(lines))
-print(0)
-print(total[best] / count[best])'''
