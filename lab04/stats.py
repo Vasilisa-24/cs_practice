@@ -2,10 +2,11 @@ def parse_record(line):
     l1 = line.split(";")
     if len(l1)!=3:
         raise ValueError("Передано не три поля")
+    l1 = [item.strip() for item in l1]
     if l1[0] == "" or l1[1] == "":
         raise ValueError("Пустое поле города или даты")
     try:
-        l1[1] = float(l1[1])
+        l1[1] = float(l1[1].replace(',','.')
     except ValueError:
         raise ValueError("Данные о темп-ре не являются числом")
     total = {"city": l1[0], "temperature": l1[1], "date": l1[2]}
@@ -14,6 +15,8 @@ def parse_record(line):
 def read_valid(lines):
     lis = []
     for line in lines:
+        if not line.strip():
+            continue
         try:
             a = parse_record(line)
             lis.append(a)
@@ -35,9 +38,13 @@ def average_by_city(records):
 
 def warmest_city(records):
     mit = average_by_city(records)
-    best = ''
-    for city in mit:
-        if mit[city] >mit.get(best, 0):
+    if not mit:
+        return ''
+    best = None
+    maxt = -float('inf')
+    for city, temp in mit.items():
+        if temp > maxt:
+            maxt = temp
             best = city
     return best
     
