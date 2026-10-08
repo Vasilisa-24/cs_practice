@@ -32,6 +32,15 @@ def average_by_city(records: list[dict])-> dict:
         midt[city] = f'{total[city]/count[city]}:.1f'
     return midt
 
+def warmest_city(records: list[dict]) -> str:
+    mit = average_by_city(records)
+    best = ""
+    for city in mit:
+        if mit[city] >mit.get(best, "0"):
+            best = city
+    return best
+    
+
 '''import sys
 
 lines = sys.stdin.read().splitlines()
