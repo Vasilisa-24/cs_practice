@@ -3,6 +3,8 @@ import sys
 
 lines = sys.stdin.read().splitlines()
 valid_lines = read_valid(lines)
+if not valid_lines:
+    sys.exit(0)
 best_city = warmest_city(valid_lines)
 best_t = average_by_city(valid_lines)[best_city]
 print(len(valid_lines))
