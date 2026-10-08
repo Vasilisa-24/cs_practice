@@ -19,6 +19,7 @@ def read_valid(lines: list[str]) -> list[dict]:
             lis.append(a)
         except ValueError:
             continue
+    return lis
         
 def average_by_city(records: list[dict])-> dict:
     total = {}
