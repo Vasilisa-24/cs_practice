@@ -6,7 +6,7 @@ def parse_record(line):
     if l1[0] == "" or l1[1] == "":
         raise ValueError("Пустое поле города или даты")
     try:
-        l1[1] = float(l1[1].replace(',','.')
+        l1[1] = float(l1[1].replace(',','.'))
     except ValueError:
         raise ValueError("Данные о темп-ре не являются числом")
     total = {"city": l1[0], "temperature": l1[1], "date": l1[2]}
@@ -15,8 +15,6 @@ def parse_record(line):
 def read_valid(lines):
     lis = []
     for line in lines:
-        if not line.strip():
-            continue
         try:
             a = parse_record(line)
             lis.append(a)
@@ -32,19 +30,15 @@ def average_by_city(records):
         city, temp, date = record.values()
         total[city] = total.get(city, 0) + float(temp)
         count[city] = count.get(city, 0) + 1
-    for city in total: 
+    for city in total:
         midt[city] = float(f'{(total[city]/count[city]):.1f}')
     return midt
 
 def warmest_city(records):
     mit = average_by_city(records)
-    if not mit:
-        return ''
     best = None
-    maxt = -float('inf')
-    for city, temp in mit.items():
-        if temp > maxt:
-            maxt = temp
+    for city in mit:
+        if (best is None) or mit[city]>mit[best]:
             best = city
     return best
     
