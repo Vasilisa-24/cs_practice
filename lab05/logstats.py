@@ -1,7 +1,8 @@
 from collections import Counter
 
-def parse_event(line: str) -> dict:
-    parts = line.strip().split()
+def parse_event(line):
+    parts = line.strip().split(maxsplit = 2)
+    #print(parts)
     if len(parts) < 3:
         raise ValueError("Недостаточно частей в строке")
     
@@ -11,7 +12,7 @@ def parse_event(line: str) -> dict:
         
     return {"time": time, "level": level, "message": message}
 
-def count_levels(lines) -> dict:
+def count_levels(lines):
     counts = Counter()
     for line in lines:
         try:
@@ -22,7 +23,7 @@ def count_levels(lines) -> dict:
     return dict(counts)
 
 
-def top_errors(lines, n: int) -> list[list]:
+def top_errors(lines, n):
     error_messages = Counter()
     for line in lines:
         try:
@@ -34,7 +35,7 @@ def top_errors(lines, n: int) -> list[list]:
     sorted_errors = sorted(error_messages.items(), key=lambda x: (-x[1], x[0]))
     return [[msg, count] for msg, count in sorted_errors[:n]]
 
-def format_report(counts: dict, errors: list[list]) -> str:
+def format_report(counts, errors):
     report_lines = ["Отчёт по журналу", ""]
     for level in sorted(counts.keys()):
         report_lines.append(f"{level}: {counts[level]}")
