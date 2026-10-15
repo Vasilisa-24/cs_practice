@@ -15,6 +15,8 @@ def parse_event(line):
 def count_levels(lines):
     counts = Counter()
     for line in lines:
+        if not line.strip():
+            continue
         try:
             event = parse_event(line)
             counts[event["level"]] += 1
