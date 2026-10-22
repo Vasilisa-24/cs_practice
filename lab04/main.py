@@ -10,15 +10,3 @@ best_t = average_by_city(valid_lines)[best_city]
 print(len(valid_lines))
 print(len(lines) - len(valid_lines))
 print(best_t)
-
-
-def deepest_path(paths):
-    return max(paths, key=lambda path: (path.count('/'), path), default="")
-
-def human_size(n_bytes):
-    list_1 = ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ']
-    for i, unit in enumerate(list_1):
-        if n_bytes < 1024:
-            return f"{n_bytes:.1f} {unit}" if unit != 'Б' else f"{n_bytes} {unit}"
-        n_bytes /= 1024
-return f"{n_bytes:.1f} ТБ"
