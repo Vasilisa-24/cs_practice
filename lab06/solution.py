@@ -2,12 +2,14 @@ from collections import defaultdict
 def count_by_extension(paths):
     ext_count = defaultdict(int)
     for path in paths:
-        if '.' in path:
-            ext = path.split('.')[-1].lower()
+        if '.' in path and path[0] != '.':
+            ext = path.rsplit('.')[-1].lower()
+            print(ext)
         else:
             ext = ""
         ext_count[ext] += 1
     return dict(ext_count)
+print(count_by_extension(["archive.tar.gz", ".gitig"]))
 
 def deepest_path(paths):
     l = sorted([t for t in paths], key = lambda x: -(x.count('/')))
