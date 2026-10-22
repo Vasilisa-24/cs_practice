@@ -1,4 +1,4 @@
-from logstats import count_levels, top_errors, format_report
+ from logstats import count_levels, top_errors, format_report
 
 def main():
     try:
