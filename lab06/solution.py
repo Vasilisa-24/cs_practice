@@ -10,7 +10,8 @@ def count_by_extension(paths):
     return dict(ext_count)
 
 def deepest_path(paths):
-    return max(paths, key=lambda path: (path.count('/'), path), default="")
+    l = sorted([t for t in paths], key = lambda x: -(x.count('/')))
+    return l[0]
 
 def human_size(n_bytes):
     list_1 = ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ']
