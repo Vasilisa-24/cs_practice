@@ -9,5 +9,7 @@ def count_by_extension(paths):
         ext_count[ext] += 1
 return dict(ext_count)
 
+def deepest_path(paths):
+    return max(paths, key=lambda path: (path.count('/'), path), default="")
 
     
