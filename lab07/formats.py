@@ -4,9 +4,20 @@ import re
 from io import StringIO
 
 def csv_to_records(text):
-    reader = csv.DictReader(StringIO(text))
-    return [dict(row) for row in reader]
+    reader = csv.reader(StringIO(text))
+    try:
+        headers = [header.strip() for header in next(reader)]
+    except StopIteration:
+        return []
+    records = []
+    for values in reader:
+        if not values or all(not value.strip() for value in values):
+            continue
+        values = [value.strip() for value in values]
+        records.append(dict(zip(headers, values)))
+    return records
 
+print(csv_to_records("город, цена \n Азов , 100"))
 def _parse_value(value):
     value = value.strip()
     if value.lower() in ("true", "yes"):
