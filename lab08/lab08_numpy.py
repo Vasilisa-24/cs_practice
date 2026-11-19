@@ -68,6 +68,8 @@ changed_matrix[1, :] = 0
 changed_matrix[:, -1] = -1
 changed_matrix[1:4, 1:4] = 100
 
+#copy создает новый объект, а присваивание значения без copy создаёт просто ссылку на старый объект
+
 print(f"\nИтоговая changed_matrix:\n{changed_matrix}")
 print(f"Исходная matrix:\n{matrix_original}")
 print()
@@ -81,5 +83,6 @@ print(f"numbers shape: {numbers.shape}")
 print(f"table shape: {table.shape}")
 print(f"transposed shape: {transposed.shape}")
 
-
+#reshape(3, 4) работает, потому что общее количество элементов сохраняется: 3*4 = 12. Это равно количеству элементов в исходном массиве numbers (от 0 до 11).
+#reshape(5, 3) вызовет ошибку (ValueError: cannot reshape array of size 12 into shape (5, 3)), так как 5*3 = 15. NumPy не может создать 15 ячеек для хранения из 12 имеющихся чисел — ему просто нечем заполнить три оставшиеся позиции. 
 
